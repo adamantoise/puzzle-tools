@@ -4,9 +4,17 @@ This is a script for solving [polyomino](http://en.wikipedia.org/wiki/Polyomino)
 
 A polyomino-fitting puzzle is a puzzle where you have a set of polyominos and a grid you want to fill with them in a non-overlapping fashion.  The goal is to find if (a) there exists a valid placement of the polyominos and (b) one such placement.
 
-The script works by converting the puzzle into a [SAT problem](http://en.wikipedia.org/wiki/Boolean_satisfiability_problem) and then feeding that into a SAT solver.  I used [Glucose](http://www.lri.fr/~simon/?page=glucose) as the backend, but in theory, it should work with any SAT solver that can read problems expressed in the DIMACS format for CNF.  Using the unmodified source, the Glucose binary must be on your $PATH for it to work.
+The script works by converting the puzzle into a [SAT problem](http://en.wikipedia.org/wiki/Boolean_satisfiability_problem) and then feeding that into a SAT solver.
 
-If the puzzle is solved, a visual solution is written out into a NetPBM image.  If the display(1) program is in your $PATH (available via ImageMagick/GraphicsMagick), then the solution will be opened up automatically.
+# Usage
+
+First, download and compile [Glucose](http://www.lri.fr/~simon/?page=glucose), or another SAT solver.  If you use a different SAT solver, then you'll also need to change the reference to the `glucose` program in the source code; in theory, it should work with any SAT solver that can read problems expressed in the DIMACS format for CNF.
+
+Add the path to `glucose` to your `$PATH` environment variable, and solve like so:
+
+    python polyomino.py puzzle-file
+
+If the puzzle is solved, a visual solution is written out into a NetPBM image (.pnm file).  If the `display(1)` program is in your `$PATH (available via ImageMagick/GraphicsMagick), then the image will also be displayed automatically.  Otherwise, open it up yourself or convert it to a more useful format like PNG using any number of tools.
 
 # Puzzle format
 
