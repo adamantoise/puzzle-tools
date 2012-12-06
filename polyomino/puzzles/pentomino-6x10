@@ -1,3 +1,4 @@
+# Fit all 12 pentominos into a 6x10 grid
 rect 6 10
 p f
 p i
