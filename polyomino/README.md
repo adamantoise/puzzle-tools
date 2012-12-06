@@ -34,4 +34,4 @@ Finally, the polyomino specifications follow.  Each subsequent non-empty, non-co
 - Pentomino: `p` followed by one of `f`, `f'`, `i`, `l`, `l'`, `n`, `n'`, `p`, `p'`, `t`, `u`, `v`, `w`, `x`, `y`, `y'`, `z`, or `z'`, which describes one of the 12 standard [pentominos](http://en.wikipedia.org/wiki/Pentomino); the prime (`'`) variants are reflections.
 - Coordinate: `c` followed by a comma-separated list of coordinate pairs of squares in the polyomino, e.g. `c 0,0, 1,0, 0,1, -1,0, 0,-1` describes the X pentomino.
 
-For some sample puzzle files, see the files in the puzzles/ subdirectory.
+For some sample puzzle files, see the files in the `puzzles/` subdirectory.
