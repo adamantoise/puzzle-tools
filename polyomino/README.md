@@ -14,7 +14,7 @@ Add the path to `glucose` to your `$PATH` environment variable, and solve like s
 
     python polyomino.py puzzle-file
 
-If the puzzle is solved, a visual solution is written out into a NetPBM image (.pnm file).  If the `display(1)` program is in your `$PATH (available via ImageMagick/GraphicsMagick), then the image will also be displayed automatically.  Otherwise, open it up yourself or convert it to a more useful format like PNG using any number of tools.
+If the puzzle is solved, a visual solution is written out into a NetPBM image (.pnm file).  If the `display(1)` program is in your `$PATH` (available via ImageMagick/GraphicsMagick), then the image will also be displayed automatically.  Otherwise, open it up yourself or convert it to a more useful format like PNG using any number of tools.
 
 # Puzzle format
 
