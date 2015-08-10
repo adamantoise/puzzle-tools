@@ -31,7 +31,7 @@ import os
 import random
 import subprocess
 import struct
-import sys
+import sys, optparse
 
 class PolyominoPuzzle:
     """Class representing one instance of a polyomino puzzle"""
@@ -343,6 +343,12 @@ class PolyominoSolution:
                 for pixel in row:
                     f.write(struct.pack('BBB', *pixel))
 
+    def text_render(self):
+        ret = ""
+        for y in self.grid:
+            ret += " ".join((chr(64 + x) if x > 0 else "#") for x in y) + "\n"
+        return ret
+
 def rotate_piece(piece, rot):
     """Rotates a puzzle piece description by 0, 90, 180, or 270 degrees"""
 
@@ -373,26 +379,35 @@ def display_image(filename):
     subprocess.Popen(['display', filename])
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
+    if len(sys.argv) < 2:
         usage()
 
     random.seed(1337)
 
-    print 'Reading puzzle: %s' % sys.argv[1]
-    puzzle = PolyominoPuzzle(sys.argv[1])
+    oparser = optparse.OptionParser()
+    oparser.add_option("-t", "--text-render", action="store_true", dest="textrender", default=False)
+    (options, args) = oparser.parse_args()
+    print options, args
+
+    print 'Reading puzzle: %s' % args[0]
+    puzzle = PolyominoPuzzle(args[0])
     print 'Converting to SAT...'
     puzzle.convert_to_sat()
     print 'Solving SAT (%d variables, %d clauses)...' % (puzzle.var_offsets[-1], len(puzzle.sat_clauses))
     solutions = puzzle.solve_sat()
     print 'Found %d solutions' % len(solutions)
     if solutions:
-        base = os.path.splitext(sys.argv[1])[0] + '-soln-%02d.pnm'
+        base = os.path.splitext(args[0])[0] + '-soln-%02d.pnm'
         out_filenames = [base % i for i in range(len(solutions))]
-        print 'Saving solutions to %s .. %s' % (out_filenames[0], out_filenames[-1])
-        for i in range(len(solutions)):
-            solutions[i].render(out_filenames[i])
-        try:
-            for filename in out_filenames:
-                display_image(filename)
-        except OSError:
-            print "Unable to display solution images, 'display' command not found"
+        if not options.textrender:
+            print 'Saving solutions to %s .. %s' % (out_filenames[0], out_filenames[-1])
+            for i in range(len(solutions)):
+                solutions[i].render(out_filenames[i])
+            try:
+                for filename in out_filenames:
+                    display_image(filename)
+            except OSError:
+                print "Unable to display solution images, 'display' command not found"
+        else:
+            for i in range(len(solutions)):
+                print solutions[i].text_render()
