@@ -372,7 +372,7 @@ def translate_piece(piece, dx, dy):
     return [(x + dx, y + dy) for x, y in piece]
 
 def usage():
-    sys.stderr.write('Usage: %s puzzle-file\n' % sys.argv[0])
+    sys.stderr.write('Usage: %s [-t|--text-render] puzzle-file\n' % sys.argv[0])
     sys.exit(1)
 
 def display_image(filename):
